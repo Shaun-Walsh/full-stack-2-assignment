@@ -9,8 +9,7 @@ import MovieFilterUI, {
 import { DiscoverMovies } from "../types/interfaces";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import AddToFavouritesIcon from '../components/cardIcons/addToFavourites'
-
+import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 
 const titleFiltering = {
   name: "title",
@@ -24,10 +23,14 @@ const genreFiltering = {
 };
 
 const HomePage: React.FC = () => {
-  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>("discover", getMovies);
-  const { filterValues, setFilterValues, filterFunction } = useFiltering(
-    [titleFiltering, genreFiltering]
+  const { data, error, isLoading, isError } = useQuery<DiscoverMovies, Error>(
+    "discover",
+    getMovies
   );
+  const { filterValues, setFilterValues, filterFunction } = useFiltering([
+    titleFiltering,
+    genreFiltering,
+  ]);
 
   if (isLoading) {
     return <Spinner />;
@@ -36,7 +39,6 @@ const HomePage: React.FC = () => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-
 
   const changeFilterValues = (type: string, value: string) => {
     const changedFilter = { name: type, value: value };
@@ -50,14 +52,13 @@ const HomePage: React.FC = () => {
   const movies = data ? data.results : [];
   const displayedMovies = filterFunction(movies);
 
-
   return (
     <>
       <PageTemplate
         title="Discover Movies"
         movies={displayedMovies}
         action={(movie: BaseMovieProps) => {
-          return <AddToFavouritesIcon {...movie} />
+          return <AddToFavouritesIcon {...movie} />;
         }}
       />
       <MovieFilterUI

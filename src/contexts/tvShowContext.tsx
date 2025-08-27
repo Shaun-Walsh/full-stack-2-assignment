@@ -29,6 +29,7 @@ const TVShowContextProvider: React.FC<React.PropsWithChildren> = ({ children }) 
     const addToFavourites = useCallback((tvshow: BaseTVShowProps) => {
         setFavourites((prevFavourites) => {
             if (!prevFavourites.includes(tvshow.id)) {
+                console.log("Adding new favourite:", tvshow.name);
                 return [...prevFavourites, tvshow.id];
             }
             return prevFavourites;

@@ -11,7 +11,7 @@ import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import SortIcon from "@mui/icons-material/Sort";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
-import { getGenres } from "../../api/tmdb-api";
+import { getTVGenres } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../spinner";
 
@@ -28,20 +28,20 @@ const styles = {
   },
 };
 
-interface FilterMoviesCardProps {
+interface FilterTVShowsCardProps {
   onUserInput: (f: FilterOption, s: string) => void; // Add this line
   titleFilter: string;
   genreFilter: string;
 }
 
-const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
+const FilterTVShowsCard: React.FC<FilterTVShowsCardProps> = ({
   titleFilter,
   genreFilter,
   onUserInput,
 }) => {
   const { data, error, isLoading, isError } = useQuery<GenreData, Error>(
-    "genres",
-    getGenres
+    "tv-genres",
+    getTVGenres
   );
 
   if (isLoading) {
@@ -78,7 +78,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
         <CardContent>
           <Typography variant="h5" component="h1">
             <FilterAltIcon fontSize="large" />
-            Filter the movies.
+            Filter the TV shows.
           </Typography>
           <TextField
             sx={styles.formControl}
@@ -113,7 +113,7 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
         <CardContent>
           <Typography variant="h5" component="h1">
             <SortIcon fontSize="large" />
-            Sort the movies.
+            Sort the tv Shows.
           </Typography>
         </CardContent>
       </Card>
@@ -121,4 +121,4 @@ const FilterMoviesCard: React.FC<FilterMoviesCardProps> = ({
   );
 };
 
-export default FilterMoviesCard;
+export default FilterTVShowsCard;

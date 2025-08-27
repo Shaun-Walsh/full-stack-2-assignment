@@ -1,15 +1,15 @@
 import React, { MouseEvent, useContext } from "react";
-import { MoviesContext } from "../../contexts/moviesContext";
+import { TVShowContext } from "../../contexts/tvShowContext";
 import IconButton from "@mui/material/IconButton";
 import FavoriteIcon from "@mui/icons-material/Favorite";
-import { BaseMovieProps } from "../../types/interfaces";
+import { BaseTVShowProps } from "../../types/interfaces";
 
-const AddToFavouritesIcon: React.FC<BaseMovieProps> = (movie) => {
-  const context = useContext(MoviesContext);
+const AddToTVShowFavouritesIcon: React.FC<BaseTVShowProps> = (tvShow) => {
+  const context = useContext(TVShowContext);
 
   const onUserSelect = (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    context.addToFavourites(movie);
+    context.addToFavourites(tvShow);
   };
   return (
     <IconButton aria-label="add to favorites" onClick={onUserSelect}>
@@ -18,4 +18,4 @@ const AddToFavouritesIcon: React.FC<BaseMovieProps> = (movie) => {
   );
 };
 
-export default AddToFavouritesIcon;
+export default AddToTVShowFavouritesIcon;

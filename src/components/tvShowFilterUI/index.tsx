@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import FilterCard from "../filterMoviesCard";
+import FilterTVShowsCard from "../filterTVShowsCard";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-import { BaseMovieProps } from "../../types/interfaces";
+import { BaseTVShowProps } from "../../types/interfaces";
 
-export const titleFilter = (movie: BaseMovieProps, value: string): boolean => {
-  return movie.title.toLowerCase().search(value.toLowerCase()) !== -1;
+export const titleFilter = (
+  tvShow: BaseTVShowProps,
+  value: string
+): boolean => {
+  return tvShow.name.toLowerCase().search(value.toLowerCase()) !== -1;
 };
 
-export const genreFilter = (movie: BaseMovieProps, value: string) => {
+export const genreFilter = (tvShow: BaseTVShowProps, value: string) => {
   const genreId = Number(value);
-  const genreIds = movie.genre_ids;
+  const genreIds = tvShow.genre_ids;
   return genreId > 0 && genreIds ? genreIds.includes(genreId) : true;
 };
 
@@ -26,13 +29,13 @@ const styles = {
   },
 };
 
-interface MovieFilterUIProps {
+interface TVShowFilterUIProps {
   onFilterValuesChange: (f: string, s: string) => void;
   titleFilter: string;
   genreFilter: string;
 }
 
-const MovieFilterUI: React.FC<MovieFilterUIProps> = ({
+const TVShowFilterUI: React.FC<TVShowFilterUIProps> = ({
   onFilterValuesChange,
   titleFilter,
   genreFilter,
@@ -54,7 +57,7 @@ const MovieFilterUI: React.FC<MovieFilterUIProps> = ({
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <FilterCard
+        <FilterTVShowsCard
           onUserInput={onFilterValuesChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
@@ -64,4 +67,4 @@ const MovieFilterUI: React.FC<MovieFilterUIProps> = ({
   );
 };
 
-export default MovieFilterUI;
+export default TVShowFilterUI;

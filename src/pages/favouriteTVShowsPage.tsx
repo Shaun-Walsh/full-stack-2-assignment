@@ -10,7 +10,7 @@ import TVShowFilterUI, {
   genreFilter,
 } from "../components/tvShowFilterUI";
 import RemoveFromTVShowFavourites from "../components/cardIcons/removeFromTVShowFavourites";
-import WriteReview from "../components/cardIcons/writeReview";
+import WriteTVShowReview from "../components/cardIcons/writeTVShowReview";
 
 
 const titleFiltering = {
@@ -67,7 +67,7 @@ const FavouriteTVShowsPage: React.FC = () => {
       return (
         <>
           <RemoveFromTVShowFavourites {...tvShow} />
-          {/* <WriteReview {...tvShow} /> */}
+          <WriteTVShowReview {...tvShow} />
         </>
       );
     }}

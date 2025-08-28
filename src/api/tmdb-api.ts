@@ -141,6 +141,38 @@ export const getTVShow = (id: string) => {
     });
 };
 
+export const getTVShowImages = (id: string | number) => {
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${id}/images?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("failed to fetch TV show images");
+      }
+      return response.json();
+    })
+    .then((json) => json.posters)
+    .catch((error) => {
+      throw error;
+    });
+};
+
+export const getTVShowReviews = (id: string | number) => {
+  //tv show id can be string or number
+  return fetch(
+    `https://api.themoviedb.org/3/tv/${id}/reviews?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }`
+  )
+    .then((res) => res.json())
+    .then((json) => {
+      // console.log(json.results);
+      return json.results;
+    });
+};
+
 export const getTVGenres = () => {
   return fetch(
     "https://api.themoviedb.org/3/genre/tv/list?api_key=" +

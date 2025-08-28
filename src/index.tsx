@@ -13,6 +13,7 @@ import MoviesContextProvider from "./contexts/moviesContext";
 import AddMovieReviewPage from './pages/addMovieReviewPage';
 import TVHomePage from "./pages/tvHomepage";
 import FavouriteTVShowsPage from "./pages/favouriteTVShowsPage";
+import TVShowDetailsPage from "./pages/tvShowDetailsPage";
 import TVShowContextProvider from "./contexts/tvShowContext";
 
 
@@ -43,6 +44,7 @@ const App = () => {
               <Route path="/reviews/form" element={<AddMovieReviewPage />} />
               <Route path="/tv" element={<TVHomePage />} />
               <Route path="/tv/favourites" element={<FavouriteTVShowsPage />} />
+              <Route path="/tv/:id" element={<TVShowDetailsPage />} />
             </Routes>
           </TVShowContextProvider>
         </MoviesContextProvider>

@@ -133,3 +133,16 @@ export interface TVShowReview {
   rating: number;
   tvShowId: number;
 }
+
+export interface CastMember {
+  id: number;
+  name: string;
+  character: string;
+  profile_path?: string;
+  credit_id: string;
+}
+
+export interface MovieCredits {
+  id: number;
+  cast: CastMember[];
+}

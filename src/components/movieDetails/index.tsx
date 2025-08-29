@@ -9,7 +9,8 @@ import { MovieDetailsProps } from "../../types/interfaces";
 import NavigationIcon from "@mui/icons-material/Navigation";
 import Fab from "@mui/material/Fab";
 import Drawer from "@mui/material/Drawer";
-import MovieReviews from '../movieReviews'
+import MovieReviews from '../movieReviews';
+import MovieCast from '../movieCast';
 
 const styles = {
     chipSet: {
@@ -67,6 +68,7 @@ const MovieDetails: React.FC<MovieDetailsProps> = (movie) => {
                 />
                 <Chip label={`Released: ${movie.release_date}`} />
             </Paper>
+            <MovieCast movieId={movie.id} />
             <Fab
                 color="secondary"
                 variant="extended"

@@ -84,6 +84,25 @@ export const getMovieReviews = (id: string | number) => {
       return json.results;
     });
 };
+
+export const getMovieCredits = (id: string | number) => {
+  return fetch(
+    `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }`
+  )
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(
+          `Failed to get movie credits. Response status: ${response.status}`
+        );
+      }
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
 export const getUpcomingMovies = () => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${

@@ -122,13 +122,13 @@ export const getActor = (id: string) => {
       throw error;
     });
 };
-export const getUpcomingMovies = () => {
+export const getUpcomingMovies = (page = 1) => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${
       import.meta.env.VITE_TMDB_KEY
-    }&include_adult=false&include_video=false&language=en-US&page=1&sort_by=popularity.desc&with_release_type=2|3&release_date.gte=${
+    }&include_adult=false&include_video=false&language=en-US&page=${page}&sort_by=popularity.desc&with_release_type=2|3&primary_release_date.gte=${
       import.meta.env.VITE_MIN_DATE
-    }&release_date.lte=${import.meta.env.VITE_MAX_DATE}`
+    }&primary_release_date.lte=${import.meta.env.VITE_MAX_DATE}`
   )
     .then((response) => {
       if (!response.ok)
@@ -142,11 +142,11 @@ export const getUpcomingMovies = () => {
     });
 };
 
-export const getTVShows = () => {
+export const getTVShows = (page = 1) => {
   return fetch(
     `https://api.themoviedb.org/3/discover/tv?api_key=${
       import.meta.env.VITE_TMDB_KEY
-    }&language=en-US&include_adult=false&include_video=false&page=1`
+    }&language=en-US&include_adult=false&include_video=false&page=${page}`
   )
     .then((response) => {
       if (!response.ok)

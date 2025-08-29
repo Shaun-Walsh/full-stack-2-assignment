@@ -146,3 +146,14 @@ export interface MovieCredits {
   id: number;
   cast: CastMember[];
 }
+
+export interface ActorDetailsProps {
+  id: number;
+  name: string;
+  biography: string;
+  birthday?: string;
+  place_of_birth?: string;
+  profile_path?: string;
+  known_for_department: string;
+  popularity: number;
+}

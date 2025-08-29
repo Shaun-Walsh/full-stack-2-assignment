@@ -7,6 +7,7 @@ import CardMedia from "@mui/material/CardMedia";
 import { getMovieCredits } from "../../api/tmdb-api";
 import { MovieCredits, CastMember } from "../../types/interfaces";
 import img from "../../images/film-poster-placeholder.png";
+import { Link } from "react-router-dom";
 
 const styles = {
     root: {
@@ -30,7 +31,7 @@ const MovieCast: React.FC<MovieCastProps> = ({ movieId }) => {
 
     useEffect(() => {
         getMovieCredits(movieId).then((credits: MovieCredits) => {
-            setCast(credits.cast); // Show only first 6 cast members
+            setCast(credits.cast);
         });
     }, [movieId]);
 
@@ -43,25 +44,27 @@ const MovieCast: React.FC<MovieCastProps> = ({ movieId }) => {
             <Grid container spacing={2}>
                 {cast.map((member: CastMember) => (
                     <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={member.credit_id}>
-                        <Card sx={styles.card}>
-                            <CardMedia
-                                sx={styles.media}
-                                image={
-                                    member.profile_path
-                                        ? `https://image.tmdb.org/t/p/w300${member.profile_path}`
-                                        : img
-                                }
-                                title={member.name}
-                            />
-                            <CardContent>
-                                <Typography variant="subtitle2" component="p">
-                                    {member.name}
-                                </Typography>
-                                <Typography variant="caption" component="p" color="text.secondary">
-                                    {member.character}
-                                </Typography>
-                            </CardContent>
-                        </Card>
+                        <Link to={`/actor/${member.id}`} style={{ textDecoration: 'none' }}>
+                            <Card sx={styles.card}>
+                                <CardMedia
+                                    sx={styles.media}
+                                    image={
+                                        member.profile_path
+                                            ? `https://image.tmdb.org/t/p/w300${member.profile_path}`
+                                            : img
+                                    }
+                                    title={member.name}
+                                />
+                                <CardContent>
+                                    <Typography variant="subtitle2" component="p">
+                                        {member.name}
+                                    </Typography>
+                                    <Typography variant="caption" component="p" color="text.secondary">
+                                        {member.character}
+                                    </Typography>
+                                </CardContent>
+                            </Card>
+                        </Link>
                     </Grid>
                 ))}
             </Grid>

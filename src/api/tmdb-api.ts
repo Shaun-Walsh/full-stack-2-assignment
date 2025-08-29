@@ -122,6 +122,9 @@ export const getActor = (id: string) => {
       throw error;
     });
 };
+
+// Fixed to fetch actual upcoming movies by using primary_release_date instead of release_date
+// This ensures movies returned are upcoming within the specified date range from the .env file
 export const getUpcomingMovies = (page = 1) => {
   return fetch(
     `https://api.themoviedb.org/3/discover/movie?api_key=${

@@ -18,6 +18,7 @@ import TVShowContextProvider from "./contexts/tvShowContext";
 import AddTVShowReviewPage from './pages/addTVShowReviewPage';
 import TVShowReviewPage from "./pages/tvShowReviewPage";
 import ActorDetailsPage from "./pages/actorDetailsPage";
+import SearchPage from "./pages/searchPage";
 
 
 const queryClient = new QueryClient({
@@ -51,6 +52,7 @@ const App = () => {
               <Route path="/tv/reviews/:id" element={<TVShowReviewPage />} />
               <Route path="/tv/reviews/form" element={<AddTVShowReviewPage />} />
               <Route path="/actor/:id" element={<ActorDetailsPage />} />
+              <Route path="/search" element={<SearchPage />} />
             </Routes>
           </TVShowContextProvider>
         </MoviesContextProvider>

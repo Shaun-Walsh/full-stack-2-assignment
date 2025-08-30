@@ -231,3 +231,26 @@ export const getTVShowReviews = (id: string | number) => {
       return json.results;
     });
 };
+
+/* https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent is used to encode special characters in the query string
+   so that it can be safely passed as a URL parameter
+   also see: https://www.w3schools.com/tags/ref_urlencode.ASP without encoding the query string it would break the url */
+export const searchMovies = (query: string, page = 1) => {
+  return fetch(
+    `https://api.themoviedb.org/3/search/movie?api_key=${
+      import.meta.env.VITE_TMDB_KEY
+    }&language=en-US&query=${encodeURIComponent(query)}&page=${page}&include_adult=false`
+  )
+    .then((response) => {
+      if (!response.ok)
+        throw new Error(
+          `Unable to search movies. Response status: ${response.status}`
+        );
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};
+
+

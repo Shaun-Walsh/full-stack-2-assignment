@@ -6,11 +6,13 @@ import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import { TextField, Button, Box, Container } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const SearchPage: React.FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
 
-  const { data, error, isLoading, isError, refetch } = useQuery(
+  const { data, error, isLoading, isError, refetch } = useQuery<any, Error>(
     ["search", searchQuery],
     () => searchMovies(searchQuery),
     {
@@ -33,7 +35,7 @@ const SearchPage: React.FC = () => {
   }
 
   if (isError) {
-    return <h1>{(error as Error)?.message || "An error occurred"}</h1>;
+    return <h1>{error.message}</h1>;
   }
 
   const results = data ? data.results : [];
@@ -68,6 +70,13 @@ const SearchPage: React.FC = () => {
             disabled={!searchQuery.trim()}
           >
             Search
+          </Button>
+          <Button
+            variant="outlined"
+            color="secondary"
+            onClick={() => navigate("/search/advanced")}
+          >
+            Advanced Search
           </Button>
         </Box>
       </Container>

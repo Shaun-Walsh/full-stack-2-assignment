@@ -239,7 +239,9 @@ export const searchMovies = (query: string, page = 1) => {
   return fetch(
     `https://api.themoviedb.org/3/search/movie?api_key=${
       import.meta.env.VITE_TMDB_KEY
-    }&language=en-US&query=${encodeURIComponent(query)}&page=${page}&include_adult=false`
+    }&language=en-US&query=${encodeURIComponent(
+      query
+    )}&page=${page}&include_adult=false`
   )
     .then((response) => {
       if (!response.ok)
@@ -253,4 +255,40 @@ export const searchMovies = (query: string, page = 1) => {
     });
 };
 
+/* Discover movies by criteria (genre, year range) using TMDB discover API
+   This complements searchMovies by allowing filtering rather than text-based search */
+export const discoverMovies = (criteria: any, page = 1) => {
+  const params = new URLSearchParams({
+    api_key: import.meta.env.VITE_TMDB_KEY,
+    language: "en-US",
+    page: page.toString(),
+    sort_by: "popularity.desc",
+    include_adult: "false",
+  });
 
+  // Add genre filter if selected
+  if (criteria.genres?.length > 0) {
+    params.append("with_genres", criteria.genres.join(","));
+  }
+
+  // Add year range filters if provided
+  if (criteria.yearFrom) {
+    params.append("primary_release_date.gte", `${criteria.yearFrom}-01-01`);
+  }
+
+  if (criteria.yearTo) {
+    params.append("primary_release_date.lte", `${criteria.yearTo}-12-31`);
+  }
+
+  return fetch(`https://api.themoviedb.org/3/discover/movie?${params}`)
+    .then((response) => {
+      if (!response.ok)
+        throw new Error(
+          `Unable to discover movies. Response status: ${response.status}`
+        );
+      return response.json();
+    })
+    .catch((error) => {
+      throw error;
+    });
+};

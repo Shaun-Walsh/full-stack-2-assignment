@@ -157,3 +157,12 @@ export interface ActorDetailsProps {
   known_for_department: string;
   popularity: number;
 }
+
+// Interface for multi-criteria search functionality
+export interface SearchCriteria {
+  genres: string[];
+  yearFrom: string;
+  yearTo: string;
+}
+
+
